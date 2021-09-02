@@ -44,11 +44,12 @@
       $.each(this.settings.buttons, function(index, value) {
         var v = networks[value],
           $icon = $(v["icon"]),
+          _text_value = base.settings.text[value] || _text_default + value,
           _href = v["url"].replace("{url}", encodeURIComponent(base.settings.url))
             .replace("{title}", encodeURIComponent(base.settings.title))
             .replace("{description}", encodeURIComponent(base.settings.description))
-            .replace("{media}", encodeURIComponent(base.settings.media)),
-          _text_value = base.settings.text[value] || _text_default + value,
+            .replace("{media}", encodeURIComponent(base.settings.media))
+            .replace("{text}", encodeURIComponent(_text_value)),
           _text_output = base.settings.text_title_case ? title_case(_text_value) : _text_value,
           $component = $("<a>", { title: base.settings.title, class: value + " pop-upper"}).attr("href", _href).attr("title", _text_output).append($icon).addClass("without-counter");
         if (base.settings.target === true) {
@@ -88,7 +89,7 @@
     networks = { // Icons: https://github.com/simple-icons/simple-icons
       "mail":  {
         icon: "<svg aria-label='Mail' role='img' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M24 4.5v15c0 .85-.65 1.5-1.5 1.5H21V7.387l-9 6.463-9-6.463V21H1.5C.649 21 0 20.35 0 19.5v-15c0-.425.162-.8.431-1.068C.7 3.16 1.076 3 1.5 3H2l10 7.25L22 3h.5c.425 0 .8.162 1.069.432.27.268.431.643.431 1.068z'/></svg>",
-        url: "mailto:?subject={url}"
+        url: "mailto:?subject={text}%3a%20{title}&body={url}"
       },
       "facebook" : {
         icon: "<svg aria-label='Facebook' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z'/></svg>",
